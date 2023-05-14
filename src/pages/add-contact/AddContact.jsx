@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../layouts/Layout';
 import axios from 'axios';
+import imagePlaceholder from "./assets/images/image-placeholder.png"
 
 
 // Components
@@ -40,6 +41,8 @@ const AddContact = () => {
     const [phone, setPhone] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
 
+    const [imageSource, setImageSource] = useState(imagePlaceholder);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Submitted !");
@@ -71,6 +74,17 @@ const AddContact = () => {
         catch (error) {
             console.log(error);
         }
+    }
+
+    const handleFileChange = (e) =>{
+        // storing selected image in 'image' variable
+        const image = e.target.files[0];
+
+        // for backend
+        setSelectedFile(image);
+
+        // for frontend (image preview)
+        setImageSource(URL.createObjectURL(image));
     }
 
 return (
@@ -105,8 +119,13 @@ return (
                                     </div>
                                     <div className="row field flex flex-col">
                                         <Label inputId={`imageInput`}>Image</Label>
-                                        <input type="file" name='image' id='imageInput' onChange={(e) => { setSelectedFile(e.target.files[0]) }} />
+                                        <input type="file" name='image' id='imageInput' onChange={(e) => handleFileChange(e)} />
+                                        {/* <input type="file" name='image' id='imageInput' onChange={(e) => { setSelectedFile(e.target.files[0]) }} /> */}
                                         {/* <FileInput id={`imageInput`} name={`image`} changeHandler={(e) => { setSelectedFile(e.target.files[0]) }} /> */}
+
+                                        <div className="image-preview p-2">
+                                            <img src={imageSource} alt="" className='max-w-[200px]'/>
+                                        </div>
                                     </div>
 
                                     <div className="row field flex flex-col">
