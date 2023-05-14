@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout';
 import axios from 'axios';
 import imagePlaceholder from "./assets/images/image-placeholder.png";
 import loading from "./assets/images/loading.gif";
+import { useNavigate } from 'react-router-dom';
 
 
 // Components
@@ -44,6 +45,9 @@ const AddContact = () => {
     const [imageSource, setImageSource] = useState(imagePlaceholder);
     const [isLoading, setIsLoading] = useState(false);
     // const [isLoading, setIsLoading] = useState(true);
+
+    // to use useNavigate hook of react-router-dom
+    const navigateTo = useNavigate();
 
 
     // form.reset() don't work in react js
@@ -88,6 +92,14 @@ const AddContact = () => {
                     console.log(res);
                     resetForm();
                     setIsLoading(false);
+
+                    // instantly navigate to contacts page on successfull date posting
+                    // navigateTo("/contacts");
+
+                        // navigate to contacts page on successfull date posting after 1s
+                    // setTimeout(navigateTo("/contacts"), 1000); //this also instantly navigate !! Why ??
+                    setTimeout(()=>navigateTo("/contacts"), 1000);
+
                 }
             )
             .catch (err => {
