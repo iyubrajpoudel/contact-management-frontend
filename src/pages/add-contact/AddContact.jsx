@@ -78,8 +78,8 @@ const AddContact = () => {
 
         // axios.post(<URL>, <Data>);
 
-        const baseURL = `http://localhost:4444`
-        const endPoint = `contact`
+        const baseURL = `http://localhost:4444`;
+        const endPoint = `contact`;
         // const URL = `localhost:4444/contact`;
         const URL = `${baseURL}/${endPoint}`;
 
