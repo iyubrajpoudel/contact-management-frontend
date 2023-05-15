@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../layouts/Layout';
 import axios from 'axios';
 import Loader from '../../components/loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 const Contacts = () => {
 
@@ -13,6 +14,8 @@ const Contacts = () => {
 
     const [hasError, setHasError] = useState(false);
     const [error, setError] = useState("");
+
+    const navigateTo = useNavigate();
 
 
     useEffect(() => {
@@ -103,7 +106,7 @@ const Contacts = () => {
         )
     }
     */
-    const ContactRow = ({contact}) => {
+    const ContactRow = ({contact, id}) => {
         return (
             <tr className="bg-white border-b-2 hover:bg-gray-50 cursor-pointer">
                 <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
@@ -131,7 +134,7 @@ const Contacts = () => {
                         <button className={`bg-blue-400 text-white px-4 py-2 font-semibold text-md`}>✏️ Edit</button>
                         <button className={`bg-red-500 text-white px-4 py-2 font-semibold text-md`}>❎ Delete</button> 
                         */}
-                        <button className={`bg-gray-400 hover:bg-gray-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>👁️‍🗨️</button>
+                        <button onClick={()=>navigateTo(`/view-contact/${id}`)} className={`bg-gray-400 hover:bg-gray-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>👁️‍🗨️</button>
                         <button className={`bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>✏️</button>
                         <button className={`bg-red-500 hover:bg-red-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>❎</button>
                     </div>
@@ -193,7 +196,7 @@ const Contacts = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {contacts?.map(contact => <ContactRow key={contact._id} contact={contact}/>)}
+                                        {contacts?.map(contact => <ContactRow key={contact._id} contact={contact} id={contact._id}/>)}
                                         {/* contacts?.map => do mapping once contacts get value (true value) */}
                                         {/* {displayRow(contacts)} */}
                                         {/* {contacts.map(item => )}

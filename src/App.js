@@ -4,6 +4,7 @@ import AddContact from './pages/add-contact/AddContact';
 import NotFound from './pages/not-found/NotFound';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
+import ViewContact from './pages/view-contact/ViewContact';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/contacts' element={<Contacts />} />
         <Route path='/add-contact' element={<AddContact />} />
+        <Route path='/view-contact/:id' element={<ViewContact />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       {/* <Contacts /> */}
