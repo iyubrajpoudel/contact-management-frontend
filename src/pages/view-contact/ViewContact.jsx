@@ -16,7 +16,7 @@ const ViewContact = () => {
 
 
     useEffect(()=>{
-        // To get all contacts : GET request on /contact endpoint
+        // To get all contactby id
         const baseURL = `http://localhost:4444`;
         const endPoint = `contact`;
         const URL = `${baseURL}/${endPoint}/${id}`;
