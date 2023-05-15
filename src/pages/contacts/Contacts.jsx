@@ -59,7 +59,6 @@ const Contacts = () => {
             setIsLoading(false);
         }
 
-
     }, [])
 
     // checking updation of contacts state
@@ -136,12 +135,35 @@ const Contacts = () => {
                         */}
                         <button onClick={()=>navigateTo(`/view-contact/${id}`)} className={`bg-gray-400 hover:bg-gray-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>👁️‍🗨️</button>
                         <button onClick={()=>navigateTo(`/edit-contact/${id}`)} className={`bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>✏️</button>
-                        <button className={`bg-red-500 hover:bg-red-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>❎</button>
+                        <button onClick={()=>handleDelete(id)} className={`bg-red-500 hover:bg-red-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>❎</button>
                     </div>
                     {/* <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> */}
                 </td>
             </tr>
         )
+    }
+
+    const handleDelete = (id)=>{
+        const confirm = window.confirm("Are you sure to delete a data ?");
+        if(confirm){
+            const baseURL = `http://localhost:4444`;
+            const endPoint = `contact`;
+            const URL = `${baseURL}/${endPoint}/${id}`;
+            try {
+                axios.delete(URL)
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data.message);
+                    window.location.reload();
+                    window.alert(res.data.message);
+                })
+                .catch(err =>{
+                    console.log(err);
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 
 
