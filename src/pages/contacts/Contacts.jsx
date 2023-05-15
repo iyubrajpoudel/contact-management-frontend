@@ -89,6 +89,20 @@ const Contacts = () => {
     }
  */
 
+    /*  Not working dont know why ?
+    const Button = ({children, bgColor, color}) => {
+        return(
+            <button className={`bg-${bgColor}-500 text-${color} font-semibold text-lg`}>{children}</button>
+        )
+    } 
+    */
+    /*                            
+    const Button = ({children, bgColor, color}) => {
+        return(
+            <button className={`bg-blue-500 text-white p-2 font-semibold text-md`}>{children}</button>
+        )
+    }
+    */
     const ContactRow = ({contact}) => {
         return (
             <tr className="bg-white border-b-2 hover:bg-gray-50 cursor-pointer">
@@ -105,8 +119,23 @@ const Contacts = () => {
                 <td className="px-6 py-4">
                     {contact.phone}  
                 </td>
-                <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                <td className="px-6 py-4">
+                    <div className='buttons flex gap-4'>
+                        {/* 
+                        <Button>View</Button>
+                        <Button>Edit</Button>
+                        <Button>Delete</Button>
+                         */}
+                        {/* 
+                        <button className={`bg-gray-400 text-white px-4 py-2 font-semibold text-md`}>👁️‍🗨️ View</button>
+                        <button className={`bg-blue-400 text-white px-4 py-2 font-semibold text-md`}>✏️ Edit</button>
+                        <button className={`bg-red-500 text-white px-4 py-2 font-semibold text-md`}>❎ Delete</button> 
+                        */}
+                        <button className={`bg-gray-400 hover:bg-gray-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>👁️‍🗨️</button>
+                        <button className={`bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>✏️</button>
+                        <button className={`bg-red-500 hover:bg-red-600 text-white px-4 py-2 font-semibold text-md rounded-md`}>❎</button>
+                    </div>
+                    {/* <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> */}
                 </td>
             </tr>
         )
