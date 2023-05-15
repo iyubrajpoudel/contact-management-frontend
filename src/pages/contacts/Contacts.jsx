@@ -11,6 +11,9 @@ const Contacts = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [hasError, setHasError] = useState(false);
+    const [error, setError] = useState("");
+
 
     useEffect(() => {
         // console.log("Hello from useEffect!");
@@ -31,14 +34,25 @@ const Contacts = () => {
                 setContacts(res.data.data);
                 setIsLoading(false);
 
+                // Reseting to false once data fetched successfully
+                setHasError(false);
             })
             .catch(err => {
                 console.log(err);
+                console.log(err.response.data.message);
                 setIsLoading(false);
+
+                //clearing contacts data on error occured
+                setContacts([]);
+
+                // for displaying error
+                setHasError(true);
+                setError(err.response.data.message)
             })
         } 
         catch (error) {
             console.log(error);
+            // console.log(error.response.data.message);
             setIsLoading(false);
         }
 
@@ -106,7 +120,18 @@ const Contacts = () => {
                     <div className='row'>
                         <h2 className='text-3xl font-bold'>All Contacts</h2>
                     </div>
-                    {isLoading?
+
+                    { // for displaying error
+                    hasError &&
+                    (
+                    <div className="row">
+                        <p className='text-red-600 text-lg'>Error occured : {error}</p>
+                    </div>
+                    )
+                    }
+
+                    { // for showing loader
+                    isLoading?
                     (
                     <div className="row">
                         <Loader/>
@@ -139,7 +164,8 @@ const Contacts = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {contacts.map(contact => <ContactRow key={contact._id} contact={contact}/>)}
+                                        {contacts?.map(contact => <ContactRow key={contact._id} contact={contact}/>)}
+                                        {/* contacts?.map => do mapping once contacts get value (true value) */}
                                         {/* {displayRow(contacts)} */}
                                         {/* {contacts.map(item => )}
                                         <tr className="bg-white border-b-2 hover:bg-gray-50 cursor-pointer">

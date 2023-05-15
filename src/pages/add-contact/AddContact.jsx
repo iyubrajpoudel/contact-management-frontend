@@ -45,6 +45,10 @@ const AddContact = () => {
     const [isLoading, setIsLoading] = useState(false);
     // const [isLoading, setIsLoading] = useState(true);
 
+    const [hasError, setHasError] = useState(false);
+    const [error, setError] = useState("");
+
+
     // to use useNavigate hook of react-router-dom
     const navigateTo = useNavigate();
 
@@ -92,6 +96,9 @@ const AddContact = () => {
                     resetForm();
                     setIsLoading(false);
 
+                     // Reseting to false once error resolved
+                    setHasError(false);
+
                     // instantly navigate to contacts page on successfull date posting
                     // navigateTo("/contacts");
 
@@ -102,8 +109,13 @@ const AddContact = () => {
                 }
             )
             .catch (err => {
-                // console.log(err);
+                console.log(err);
                 setIsLoading(false);
+
+                // // for displaying error
+                setHasError(true);
+                setError(err.response.data.message)
+
             })
         } 
         catch (error) {
@@ -127,11 +139,21 @@ return (
     <>
         <Layout>
             <div className="wrapper">
-                <div className="container px-2 py-8">
+                <div className="container px-2 py-8 flex flex-col gap-8">
                     <div className='row'>
                         <h2 className='text-3xl font-bold'>Add New Contact</h2>
                     </div>
-                    { isLoading?
+                    { // for displaying error
+                    hasError &&
+                    (
+                    <div className="row">
+                        <p className='text-red-600 text-lg'>Error occured : {error}</p>
+                    </div>
+                    )
+                    }
+
+                    { // for showing loader
+                    isLoading?
                     (
                     <div className="row">
                         <Loader/>
@@ -139,7 +161,7 @@ return (
                     )
                     :
                     (
-                    <div className='row p-2 mt-6'>
+                    <div className='row p-2'>
                         <div className="form-wrapper md:w-1/2">
                             <form action="" onSubmit={handleSubmit}>
                                 <div className="row flex flex-col gap-4">
