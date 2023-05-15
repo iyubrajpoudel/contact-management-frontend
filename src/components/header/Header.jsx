@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import "./Header.css"
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
                     <div className="row flex gap-10 items-center">
                         <div className="col">
                             <div className="logo">
-                                <p className='font-bold text-2xl'>Contact App 📞</p>
+                                <Link to={"/"}><p className='font-bold text-2xl'>Contact App 📞</p></Link>
                             </div>
                         </div>
                         <div className="col grow">
