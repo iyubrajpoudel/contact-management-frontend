@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../layouts/Layout';
 import axios from 'axios';
+import Loader from '../../components/loader/Loader';
 
 const Contacts = () => {
 
     // useEffect(()=>{}, [])
 
     const [contacts, setContacts] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
         // console.log("Hello from useEffect!");
@@ -16,18 +20,28 @@ const Contacts = () => {
         const endPoint = `contact`;
         const URL = `${baseURL}/${endPoint}`;
 
-        axios.get(URL)
+        try {
+            setIsLoading(true);
+            axios.get(URL)
             .then(res => {
                 // console.log(res);
                 // console.log(res.status);
                 // console.log(res.data);
                 // console.log(res.data.data); // This gives array of object (each data).
                 setContacts(res.data.data);
+                setIsLoading(false);
 
             })
             .catch(err => {
                 console.log(err);
+                setIsLoading(false);
             })
+        } 
+        catch (error) {
+            console.log(error);
+            setIsLoading(false);
+        }
+
 
     }, [])
 
@@ -92,6 +106,14 @@ const Contacts = () => {
                     <div className='row'>
                         <h2 className='text-3xl font-bold'>All Contacts</h2>
                     </div>
+                    {isLoading?
+                    (
+                    <div className="row">
+                        <Loader/>
+                    </div>
+                    )
+                    :
+                    (
                     <div className="row">
                         <div className="table-wrapper">
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -143,6 +165,8 @@ const Contacts = () => {
 
                         </div>
                     </div>
+                    )
+                    }
                 </div>
             </Layout>
         </>
