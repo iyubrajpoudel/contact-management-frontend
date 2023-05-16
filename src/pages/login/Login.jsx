@@ -4,10 +4,16 @@ import TextField from '../../components/form/text-field/TextField'
 import Button from '../../components/form/button/Button'
 import axios from 'axios'
 import Loader from './../../components/loader/Loader';
+import Success from './../../components/success/Success';
+import Error from './../../components/error/Error';
 
 const Login = () => {
 
     const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
 
     const [formData, setFormData] = useState({
         username: "",
@@ -34,10 +40,21 @@ const Login = () => {
             .then(res => {
                 setIsLoading(false);
                 console.log(res);
+
+                // success case
+                setSuccess(true);
+                setSuccessMessage(res.data.message);
+
+                setHasError(false);
             })
             .catch(err => {
                 setIsLoading(false);
                 console.log(err);
+
+                //error case
+                setHasError(true);
+                setErrorMessage(err.response.data.message);
+                setSuccess(false);
             })
         } catch (error) {
             setIsLoading(false);
@@ -62,6 +79,26 @@ const Login = () => {
                                     <div className="row">
                                         <h2 className='text-3xl font-semibold text-center'>Login</h2>
                                     </div>
+                                    {
+                                        hasError&&
+                                        (
+                                            <div className="row">
+                                                <Error>
+                                                    Error : {errorMessage}
+                                                </Error>
+                                            </div>
+                                        )
+                                    }
+                                    {
+                                        success&&
+                                        (
+                                            <div className="row">
+                                                <Success>
+                                                    {successMessage}
+                                                </Success>
+                                            </div>
+                                        )
+                                    }
                                     <div className="row">
                                         <div className="form-wrapper">
                                             <form action="" onSubmit={(e)=>submitHandler(e)}>
