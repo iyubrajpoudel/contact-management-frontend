@@ -132,34 +132,63 @@ const EditContact = () => {
         try {
             // show loader untill data posted
             setIsLoading(true);
+            console.log(selectedFile);
 
-            axios.put(URL, formData)
-            .then(res => { 
+            if(selectedFile){
+                axios.put(URL, formData)
+                .then(res => { 
+                        console.log(res);
+                        resetForm();
+                        setIsLoading(false);
+    
+                         // Reseting to false once error resolved
+                        setHasError(false);
+    
+                        // instantly navigate to contacts page on successfull date posting
+                        // navigateTo("/contacts");
+    
+                            // navigate to contacts page on successfull date posting after 1s
+                        // setTimeout(navigateTo("/contacts"), 1000); //this also instantly navigate !! Why ??
+                        setTimeout(()=>navigateTo("/contacts"), 1000);
+    
+                    }
+                )
+                .catch (err => {
+                    console.log(err);
+                    setIsLoading(false);
+    
+                    // // for displaying error
+                    setHasError(true);
+                    setError(err.response.data.message)
+    
+                })
+            }
+            else{
+                const formData = {
+                    name: name,
+                    email: email,
+                    phone: phone
+                }
+                axios.patch(URL, formData)
+                .then(res => {
+                    console.log(res);
                     console.log(res);
                     resetForm();
                     setIsLoading(false);
-
                      // Reseting to false once error resolved
                     setHasError(false);
-
-                    // instantly navigate to contacts page on successfull date posting
-                    // navigateTo("/contacts");
-
-                        // navigate to contacts page on successfull date posting after 1s
-                    // setTimeout(navigateTo("/contacts"), 1000); //this also instantly navigate !! Why ??
                     setTimeout(()=>navigateTo("/contacts"), 1000);
 
-                }
-            )
-            .catch (err => {
-                console.log(err);
-                setIsLoading(false);
-
-                // // for displaying error
-                setHasError(true);
-                setError(err.response.data.message)
-
-            })
+                })
+                .catch(err =>{
+                    console.log(err);
+                    setIsLoading(false);
+    
+                    // // for displaying error
+                    setHasError(true);
+                    setError(err.response.data.message)
+                })
+            }
         } 
         catch (error) {
             console.log(error);
