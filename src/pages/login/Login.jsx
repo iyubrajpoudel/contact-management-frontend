@@ -72,7 +72,7 @@ const Login = () => {
     return (
         <>
             <Layout>
-            <div className="wrapper">
+            <div className="wrapper p-2">
                     <div className="container min-h-[80vh] flex justify-center items-center">
                         {isLoading?
                             (
@@ -82,7 +82,7 @@ const Login = () => {
                             )
                             :
                             (
-                                <div className="row flex flex-col gap-8 w-1/2">
+                                <div className="row flex flex-col gap-8 w-full md:w-1/2">
                                     <div className="row">
                                         <h2 className='text-3xl font-semibold text-center'>Login</h2>
                                     </div>
