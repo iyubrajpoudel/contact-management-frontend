@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../../layouts/Layout'
 import TextField from '../../components/form/text-field/TextField'
 import Button from '../../components/form/button/Button'
+import axios from 'axios'
 
 const Login = () => {
 
@@ -18,6 +19,25 @@ const Login = () => {
         // console.log(formData);
     }
 
+    const submitHandler = (e) =>{
+        e.preventDefault();
+
+        // posting to backend
+        const baseURL = process.env.REACT_APP_BASE_URL;
+        const URL = `${baseURL}/user/login`
+        try {
+            axios.post(URL, formData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <Layout>
@@ -29,7 +49,7 @@ const Login = () => {
                             </div>
                             <div className="row">
                                 <div className="form-wrapper">
-                                    <form action="">
+                                    <form action="" onSubmit={(e)=>submitHandler(e)}>
                                         <div className="row flex flex-col gap-4">
                                             <div className="field">
                                                 <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`Username`} value={formData.username} handleChange={(e)=>changeHandler(e)} />
