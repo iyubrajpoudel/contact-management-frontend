@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../../layouts/Layout'
+import TextField from '../../components/form/text-field/TextField'
+import Button from '../../components/form/button/Button'
+import axios from 'axios'
 
+/* 
 const TextField = ({ label, type, name, id, placeholder, value, handleChange }) => {
     return (
         <div className="row w-full flex flex-col gap-2">
@@ -14,9 +18,50 @@ const Button = ({ type, id, children }) => {
     return (
         <button type={type} id={id} className='bg-purple-600 w-full text-white py-2 px-4 hover:bg-purple-800 text-lg font-semibold focus:outline-2 outline-purple-900'>{children}</button>
     )
-}
+} 
+*/
+
 
 const Register = () => {
+
+    const [formData, setFormData] = useState({
+        name: "",
+        username: "",
+        email: "",
+        password: "",
+    });
+    
+
+    const changeHandler = (e) =>{
+        // console.log(e.target);
+        const key = e.target.name;
+        const value = e.target.value;
+        // console.log(key, value);
+
+        // setFormData({...formData, key: value}) // key : here key is not a 'key' variable its a general key for object.
+        setFormData({...formData, [key]: value}) // [key] : here key is a 'key' variable (dynamic variable [variable]) is used
+
+        // console.log(formData);
+    }
+
+    const submitHandler = (e) =>{
+        e.preventDefault();
+
+        const baseURL = process.env.REACT_APP_BASE_URL;
+        const URL = `${baseURL}/user/register`
+        try {
+            axios.post(URL, formData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <Layout>
@@ -28,19 +73,19 @@ const Register = () => {
                             </div>
                             <div className="row">
                                 <div className="form-wrapper">
-                                    <form action="">
+                                    <form action="" onSubmit={(e)=>submitHandler(e)}>
                                         <div className="row flex flex-col gap-4">
                                             <div className="field">
-                                                <TextField label={`Name`} type={`text`} name={`name`} id={`nameInput`} placeholder={`John Doe`} value={``} onChange={``} />
+                                                <TextField label={`Name`} type={`text`} name={`name`} id={`nameInput`} placeholder={`John Doe`} value={formData.name} handleChange={changeHandler} />
                                             </div>
                                             <div className="field">
-                                                <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`john_doe`} value={``} onChange={``} />
+                                                <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`john_doe`} value={formData.username} handleChange={changeHandler} />
                                             </div>
                                             <div className="field">
-                                                <TextField label={`Email`} type={`email`} name={`email`} id={`emailInput`} placeholder={`someone@gmail.com`} value={``} onChange={``} />
+                                                <TextField label={`Email`} type={`email`} name={`email`} id={`emailInput`} placeholder={`someone@gmail.com`} value={formData.email} handleChange={changeHandler} />
                                             </div>
                                             <div className="field">
-                                                <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={``} onChange={``} />
+                                                <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={formData.password} handleChange={changeHandler} />
                                             </div>
                                             <div className="field">
                                                 <Button>Register</Button>

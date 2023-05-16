@@ -24,7 +24,7 @@ const Login = () => {
                                                 <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={``} onChange={``} />
                                             </div>
                                             <div className="field">
-                                                <Button>Register</Button>
+                                                <Button>Login</Button>
                                             </div>
                                         </div>
                                     </form>
