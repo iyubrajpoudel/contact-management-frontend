@@ -6,6 +6,7 @@ import axios from 'axios'
 import Loader from './../../components/loader/Loader';
 import Success from './../../components/success/Success';
 import Error from './../../components/error/Error';
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
@@ -19,6 +20,8 @@ const Login = () => {
         username: "",
         password: "",
     });
+
+    const navigateTo = useNavigate();
 
     const changeHandler = (e) =>{
         // console.log(e);
@@ -46,6 +49,10 @@ const Login = () => {
                 setSuccessMessage(res.data.message);
 
                 setHasError(false);
+
+                // navigating to home (/) on successfull login after 1sec
+                setTimeout(()=>navigateTo("/"), 1000);
+                
             })
             .catch(err => {
                 setIsLoading(false);
