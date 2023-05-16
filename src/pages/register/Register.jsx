@@ -6,6 +6,7 @@ import axios from 'axios'
 import Loader from '../../components/loader/Loader'
 import Error from './../../components/error/Error';
 import Success from './../../components/success/Success';
+import { useNavigate } from 'react-router-dom'
 
 /* 
 const TextField = ({ label, type, name, id, placeholder, value, handleChange }) => {
@@ -39,6 +40,8 @@ const Register = () => {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
+
+    const navigateTo = useNavigate();
     
 
     const changeHandler = (e) =>{
@@ -76,6 +79,9 @@ const Register = () => {
                     // set hasError to false if it was previously true
                 setHasError(false);
                 resetForm();
+
+                // Navigating after 2sec to login page after successfull registration
+                setTimeout(()=>navigateTo("/login"), 2000);
             })
             .catch(err => {
                     // stop loader
@@ -127,7 +133,7 @@ const Register = () => {
                                 hasError&&
                                 (
                                     <div className="row">
-                                        <Error>{error}</Error>
+                                        <Error>Error : {error}</Error>
                                     </div>
                                 )
                                 }
@@ -135,7 +141,7 @@ const Register = () => {
                                 success&&
                                 (
                                     <div className="row">
-                                        <Success>{successMessage}</Success>
+                                        <Success>{successMessage}. You can login now.</Success>
                                     </div>
                                 )
                                 }
