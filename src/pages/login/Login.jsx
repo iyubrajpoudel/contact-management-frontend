@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../../layouts/Layout'
 import TextField from '../../components/form/text-field/TextField'
 import Button from '../../components/form/button/Button'
 
 const Login = () => {
+
+    const [formData, setFormData] = useState({
+        username: "",
+        password: "",
+    });
+
+    const changeHandler = (e) =>{
+        // console.log(e);
+        const key = e.target.name;
+        const value = e.target.value;
+        setFormData({...formData, [key]:value})
+        // console.log(formData);
+    }
+
     return (
         <>
             <Layout>
@@ -18,10 +32,10 @@ const Login = () => {
                                     <form action="">
                                         <div className="row flex flex-col gap-4">
                                             <div className="field">
-                                                <TextField label={`Email`} type={`email`} name={`email`} id={`emailInput`} placeholder={`someone@gmail.com`} value={``} onChange={``} />
+                                                <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`Username`} value={formData.username} handleChange={(e)=>changeHandler(e)} />
                                             </div>
                                             <div className="field">
-                                                <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={``} onChange={``} />
+                                                <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`**********`} value={formData.password} handleChange={(e)=>changeHandler(e)} />
                                             </div>
                                             <div className="field">
                                                 <Button>Login</Button>
