@@ -13,13 +13,19 @@ const Header = () => {
                                 <Link to={"/"}><p className='font-bold text-2xl'>Contact App 📞</p></Link>
                             </div>
                         </div>
-                        <div className="col grow">
+                        <div className="col grow flex justify-between">
                             <div className="menu-wrapper text-lg text-gray-300">
                                 <ul className='menus flex gap-8'>
                                     <li className='menu'><NavLink to={`/contacts`}>All Contacts</NavLink></li>
                                     <li className='menu'><NavLink to={`/add-contact`}>Add Contact</NavLink></li>
                                 </ul>
                             </div>
+                            <div className="user-menu-wrapper text-lg text-gray-300">
+                                <ul className='menus flex gap-8'>
+                                    <li className='menu'><NavLink to={`/login`}>Login</NavLink></li>
+                                    <li className='menu'><NavLink to={`/register`}>Register</NavLink></li>
+                                </ul>
+                            </div>  
                         </div>
                     </div>
                 </div>
