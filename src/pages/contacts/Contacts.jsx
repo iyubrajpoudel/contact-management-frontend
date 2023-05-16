@@ -22,7 +22,8 @@ const Contacts = () => {
         // console.log("Hello from useEffect!");
 
         // To get all contacts : GET request on /contact endpoint
-        const baseURL = `http://localhost:4444`;
+        // const baseURL = `http://localhost:4444`;
+        const baseURL = process.env.REACT_APP_BASE_URL;
         const endPoint = `contact`;
         const URL = `${baseURL}/${endPoint}`;
 
@@ -146,7 +147,8 @@ const Contacts = () => {
     const handleDelete = (id)=>{
         const confirm = window.confirm("Are you sure to delete a data ?");
         if(confirm){
-            const baseURL = `http://localhost:4444`;
+            // const baseURL = `http://localhost:4444`;
+            const baseURL = process.env.REACT_APP_BASE_URL;
             const endPoint = `contact`;
             const URL = `${baseURL}/${endPoint}/${id}`;
             try {
@@ -155,7 +157,7 @@ const Contacts = () => {
                     console.log(res);
                     console.log(res.data.message);
                     window.location.reload();
-                    window.alert(res.data.message);
+                    // window.alert(res.data.message);
                 })
                 .catch(err =>{
                     console.log(err);
