@@ -3,6 +3,9 @@ import Layout from '../../layouts/Layout'
 import TextField from '../../components/form/text-field/TextField'
 import Button from '../../components/form/button/Button'
 import axios from 'axios'
+import Loader from '../../components/loader/Loader'
+import Error from './../../components/error/Error';
+import Success from './../../components/success/Success';
 
 /* 
 const TextField = ({ label, type, name, id, placeholder, value, handleChange }) => {
@@ -30,6 +33,12 @@ const Register = () => {
         email: "",
         password: "",
     });
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
     
 
     const changeHandler = (e) =>{
@@ -50,16 +59,50 @@ const Register = () => {
         const baseURL = process.env.REACT_APP_BASE_URL;
         const URL = `${baseURL}/user/register`
         try {
+                // start loader
+            setIsLoading(true);
+
             axios.post(URL, formData)
             .then(res => {
-                console.log(res);
+                    // stop loader
+                setIsLoading(false);
+
+                // console.log(res);
+
+                // success case
+                setSuccess(true);
+                setSuccessMessage(res.data.message);
+
+                    // set hasError to false if it was previously true
+                setHasError(false);
+                resetForm();
             })
             .catch(err => {
-                console.log(err);
+                    // stop loader
+                setIsLoading(false);
+
+                // console.log(err);
+
+                // error case
+                setHasError(true);
+                setError(err.response.data.message);
+
+                    // set success to false if it was previously true
+                setSuccess(false);
             })
         } catch (error) {
+            setIsLoading(false);
             console.log(error);
         }
+    }
+
+    const resetForm = () =>{
+        setFormData({
+            name: "",
+            username: "",
+            email: "",
+            password: ""
+        });
     }
 
     return (
@@ -67,34 +110,61 @@ const Register = () => {
             <Layout>
                 <div className="wrapper">
                     <div className="container min-h-[80vh] flex justify-center items-center">
-                        <div className="row flex flex-col gap-8 w-1/2">
+                        {
+                        isLoading?
+                        (
                             <div className="row">
-                                <h2 className='text-3xl font-semibold text-center'>Create an account</h2>
+                                <Loader/>
                             </div>
-                            <div className="row">
-                                <div className="form-wrapper">
-                                    <form action="" onSubmit={(e)=>submitHandler(e)}>
-                                        <div className="row flex flex-col gap-4">
-                                            <div className="field">
-                                                <TextField label={`Name`} type={`text`} name={`name`} id={`nameInput`} placeholder={`John Doe`} value={formData.name} handleChange={changeHandler} />
+                        )
+                        :
+                        (
+                            <div className="row flex flex-col gap-8 w-1/2">
+                                <div className="row">
+                                    <h2 className='text-3xl font-semibold text-center'>Create an account</h2>
+                                </div>
+                                {
+                                hasError&&
+                                (
+                                    <div className="row">
+                                        <Error>{error}</Error>
+                                    </div>
+                                )
+                                }
+                                {
+                                success&&
+                                (
+                                    <div className="row">
+                                        <Success>{successMessage}</Success>
+                                    </div>
+                                )
+                                }
+                                <div className="row">
+                                    <div className="form-wrapper">
+                                        <form action="" onSubmit={(e)=>submitHandler(e)}>
+                                            <div className="row flex flex-col gap-4">
+                                                <div className="field">
+                                                    <TextField label={`Name`} type={`text`} name={`name`} id={`nameInput`} placeholder={`John Doe`} value={formData.name} handleChange={changeHandler} />
+                                                </div>
+                                                <div className="field">
+                                                    <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`john_doe`} value={formData.username} handleChange={changeHandler} />
+                                                </div>
+                                                <div className="field">
+                                                    <TextField label={`Email`} type={`email`} name={`email`} id={`emailInput`} placeholder={`someone@gmail.com`} value={formData.email} handleChange={changeHandler} />
+                                                </div>
+                                                <div className="field">
+                                                    <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={formData.password} handleChange={changeHandler} />
+                                                </div>
+                                                <div className="field">
+                                                    <Button>Register</Button>
+                                                </div>
                                             </div>
-                                            <div className="field">
-                                                <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`john_doe`} value={formData.username} handleChange={changeHandler} />
-                                            </div>
-                                            <div className="field">
-                                                <TextField label={`Email`} type={`email`} name={`email`} id={`emailInput`} placeholder={`someone@gmail.com`} value={formData.email} handleChange={changeHandler} />
-                                            </div>
-                                            <div className="field">
-                                                <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={formData.password} handleChange={changeHandler} />
-                                            </div>
-                                            <div className="field">
-                                                <Button>Register</Button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )
+                        }
                     </div>
                 </div>
             </Layout>
