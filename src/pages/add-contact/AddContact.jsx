@@ -91,7 +91,14 @@ const AddContact = () => {
             // show loader untill data posted
             setIsLoading(true);
 
-            axios.post(URL, formData)
+            //auth checking
+            const authObj = JSON.parse(localStorage.getItem("auth"));
+            
+            axios.post(URL, formData, {
+                headers: {
+                    Authorization: `Bearer ${authObj.token}`
+                }
+            })
             .then(res => { 
                     console.log(res);
                     resetForm();

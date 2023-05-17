@@ -24,7 +24,13 @@ const ViewContact = () => {
 
         try {
             setIsLoading(true);
-            axios.get(URL)
+
+            const authObj = JSON.parse(localStorage.getItem("auth"));
+            axios.get(URL, {
+                headers: {
+                    Authorization: `Bearer ${authObj.token}`
+                }
+            })
             .then(res=>{
                 // console.log(res);
                 // console.log(res.data);

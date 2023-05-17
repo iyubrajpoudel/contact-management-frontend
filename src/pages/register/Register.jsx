@@ -33,6 +33,7 @@ const Register = () => {
         username: "",
         email: "",
         password: "",
+        userType: "member"
     });
 
     const [isLoading, setIsLoading] = useState(false);

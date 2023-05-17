@@ -55,12 +55,13 @@ const Login = () => {
                 // localStorage.setItem("token", res.data.data.token);
 
                 // saving user data to local storage
-                const {username, email, token} = res.data.data;
+                const {username, email, userType, token} = res.data.data;
                 // console.log(username, email, token);
 
                 localStorage.setItem("auth", JSON.stringify({
                     username: username,
                     email: email,
+                    userType: userType, 
                     token: token
                 }))
 

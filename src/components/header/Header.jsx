@@ -30,7 +30,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="wrapper min-h-[10vh] bg-purple-900 text-white flex items-center w-full fixed top-0">
+            <div className="wrapper min-h-[10vh] bg-purple-900 text-white flex items-center w-full fixed top-0 z-10">
                 <div className="container p-2">
                     <div className="row flex gap-10 items-center">
                         <div className="col">
