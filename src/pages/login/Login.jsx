@@ -43,12 +43,16 @@ const Login = () => {
             .then(res => {
                 setIsLoading(false);
                 console.log(res);
+                console.log(res.data.data.token);
 
                 // success case
                 setSuccess(true);
                 setSuccessMessage(res.data.message);
 
                 setHasError(false);
+
+                // saving token to local storage
+                localStorage.setItem("token", res.data.data.token);
 
                 // navigating to home (/) on successfull login after 1sec
                 setTimeout(()=>navigateTo("/"), 1000);
