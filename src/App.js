@@ -8,6 +8,8 @@ import ViewContact from './pages/view-contact/ViewContact';
 import EditContact from './pages/edit-contact/EditContact';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
+// import { redirect } from "react-router-dom";
+// import { isMember } from './utils/protectRoute';
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/contacts' element={<Contacts />} />
+        {/* <Route path='/add-contact' loader={isMember()} element={<AddContact />} /> */}
         <Route path='/add-contact' element={<AddContact />} />
         <Route path='/view-contact/:id' element={<ViewContact />} />
         <Route path='/edit-contact/:id' element={<EditContact />} />

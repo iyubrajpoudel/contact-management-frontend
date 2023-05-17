@@ -24,7 +24,7 @@ const Header = () => {
         const confirmFlag = window.confirm("Are you sure to log out?")
         if (confirmFlag){
             localStorage.clear();
-            navigateTo("/");
+            navigateTo("/login");
         }
     }
 

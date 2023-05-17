@@ -126,10 +126,10 @@ const Login = () => {
                                             <form action="" onSubmit={(e)=>submitHandler(e)}>
                                                 <div className="row flex flex-col gap-4">
                                                     <div className="field">
-                                                        <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`Username`} value={formData.username} handleChange={(e)=>changeHandler(e)} />
+                                                        <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`Username`} value={formData.username} handleChange={(e)=>changeHandler(e)} required={`required`} />
                                                     </div>
                                                     <div className="field">
-                                                        <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`**********`} value={formData.password} handleChange={(e)=>changeHandler(e)} />
+                                                        <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`**********`} value={formData.password} handleChange={(e)=>changeHandler(e)} required={`required`} />
                                                     </div>
                                                     <div className="field">
                                                         <Button>Login</Button>

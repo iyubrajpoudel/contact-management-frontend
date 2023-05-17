@@ -151,16 +151,16 @@ const Register = () => {
                                         <form action="" onSubmit={(e)=>submitHandler(e)}>
                                             <div className="row flex flex-col gap-4">
                                                 <div className="field">
-                                                    <TextField label={`Name`} type={`text`} name={`name`} id={`nameInput`} placeholder={`John Doe`} value={formData.name} handleChange={changeHandler} />
+                                                    <TextField label={`Name`} type={`text`} name={`name`} id={`nameInput`} placeholder={`John Doe`} value={formData.name} handleChange={changeHandler} required={`required`} />
                                                 </div>
                                                 <div className="field">
-                                                    <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`john_doe`} value={formData.username} handleChange={changeHandler} />
+                                                    <TextField label={`Username`} type={`text`} name={`username`} id={`usernameInput`} placeholder={`john_doe`} value={formData.username} handleChange={changeHandler} required={`required`} />
                                                 </div>
                                                 <div className="field">
-                                                    <TextField label={`Email`} type={`email`} name={`email`} id={`emailInput`} placeholder={`someone@gmail.com`} value={formData.email} handleChange={changeHandler} />
+                                                    <TextField label={`Email`} type={`email`} name={`email`} id={`emailInput`} placeholder={`someone@gmail.com`} value={formData.email} handleChange={changeHandler} required={`required`} />
                                                 </div>
                                                 <div className="field">
-                                                    <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={formData.password} handleChange={changeHandler} />
+                                                    <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={formData.password} handleChange={changeHandler} required={`required`} />
                                                 </div>
                                                 <div className="field">
                                                     <Button>Register</Button>
