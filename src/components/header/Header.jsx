@@ -1,8 +1,29 @@
-import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import "./Header.css"
 
 const Header = () => {
+
+    const [isLoggedin, setIsLoggedIn] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useState(null);
+
+    const navigateTo = useNavigate();
+
+    useEffect(()=>{
+        const auth = localStorage.getItem("auth");
+        // console.log(auth);
+        if (auth){
+            const authObj = JSON.parse(auth);
+            setIsLoggedIn(true);
+            setLoggedInUser(authObj.username);
+        }
+    }, [])
+
+    const logoutHandler = () =>{
+        localStorage.clear();
+        navigateTo("/");
+    }
+
     return (
         <>
             <div className="wrapper min-h-[10vh] bg-purple-900 text-white flex items-center">
@@ -21,10 +42,25 @@ const Header = () => {
                                 </ul>
                             </div>
                             <div className="user-menu-wrapper text-sm md:text-lg text-gray-300">
-                                <ul className='menus flex flex-col gap-2 md:flex-row md:gap-8'>
-                                    <li className='menu'><NavLink to={`/login`}>Login</NavLink></li>
-                                    <li className='menu'><NavLink to={`/register`}>Register</NavLink></li>
-                                </ul>
+                                    {
+                                    isLoggedin?
+                                        (
+                                            <ul className='menus flex flex-col gap-2 md:flex-row md:gap-8'>
+                                                <li className='menu'><NavLink to={`/`}>{loggedInUser}</NavLink></li>
+                                                {/* <li className='menu'><NavLink to={`/`}>Logout</NavLink></li> */}
+                                                <li className='menu'>
+                                                    <button onClick={logoutHandler}>Logout</button>
+                                                </li>
+                                            </ul>
+                                        )
+                                    :
+                                        (
+                                        <ul className='menus flex flex-col gap-2 md:flex-row md:gap-8'>
+                                            <li className='menu'><NavLink to={`/login`}>Login</NavLink></li>
+                                            <li className='menu'><NavLink to={`/register`}>Register</NavLink></li>
+                                        </ul>
+                                        )
+                                    }
                             </div>  
                         </div>
                     </div>
