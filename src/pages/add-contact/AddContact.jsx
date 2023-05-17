@@ -96,7 +96,7 @@ const AddContact = () => {
             
             axios.post(URL, formData, {
                 headers: {
-                    Authorization: `Bearer ${authObj.token}`
+                    Authorization: `Bearer ${authObj?.token}`
                 }
             })
             .then(res => { 

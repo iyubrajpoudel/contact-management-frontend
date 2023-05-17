@@ -55,7 +55,13 @@ const EditContact = () => {
 
          try {
             setIsLoading(true);
-            axios.get(URL)
+            //auth checking
+            const authObj = JSON.parse(localStorage.getItem("auth"));
+            axios.get(URL, {
+                headers: {
+                    Authorization: `Bearer ${authObj?.token}`
+                }
+            })
             .then(res=>{
                 // console.log(res);
                 // console.log(res.data);
@@ -134,8 +140,15 @@ const EditContact = () => {
             setIsLoading(true);
             console.log(selectedFile);
 
+            //auth checking
+            const authObj = JSON.parse(localStorage.getItem("auth"));
+
             if(selectedFile){
-                axios.put(URL, formData)
+                axios.put(URL, formData, {
+                    headers: {
+                        Authorization: `Bearer ${authObj?.token}`
+                    }
+                })
                 .then(res => { 
                         console.log(res);
                         resetForm();
@@ -169,7 +182,11 @@ const EditContact = () => {
                     email: email,
                     phone: phone
                 }
-                axios.patch(URL, formData)
+                axios.patch(URL, formData, {
+                    headers: {
+                        Authorization: `Bearer ${authObj?.token}`
+                    }
+                })
                 .then(res => {
                     console.log(res);
                     console.log(res);
