@@ -152,15 +152,26 @@ const Contacts = () => {
             const endPoint = `contact`;
             const URL = `${baseURL}/${endPoint}/${id}`;
             try {
-                axios.delete(URL)
+                //check auth
+                const authObj = JSON.parse(localStorage.getItem("auth"));
+
+                axios.delete(URL, {
+                    headers: {
+                        Authorization: `Bearer ${authObj?.token}`
+                    }
+                })
                 .then(res => {
                     console.log(res);
                     console.log(res.data.message);
                     window.location.reload();
                     // window.alert(res.data.message);
+
+                    setHasError(false);
                 })
                 .catch(err =>{
+                    setHasError(true);
                     console.log(err);
+                    setError(err.response.data.message);
                 })
             } catch (error) {
                 console.log(error);
