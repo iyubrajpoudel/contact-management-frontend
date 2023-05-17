@@ -52,7 +52,17 @@ const Login = () => {
                 setHasError(false);
 
                 // saving token to local storage
-                localStorage.setItem("token", res.data.data.token);
+                // localStorage.setItem("token", res.data.data.token);
+
+                // saving user data to local storage
+                const {username, email, token} = res.data.data;
+                // console.log(username, email, token);
+
+                localStorage.setItem("auth", JSON.stringify({
+                    username: username,
+                    email: email,
+                    token: token
+                }))
 
                 // navigating to home (/) on successfull login after 1sec
                 setTimeout(()=>navigateTo("/"), 1000);
