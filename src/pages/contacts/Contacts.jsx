@@ -107,9 +107,13 @@ const Contacts = () => {
         )
     }
     */
-    const ContactRow = ({contact, id}) => {
+    const ContactRow = ({contact, id, index}) => {
         return (
+            // <tr className="bg-white border-b-2 hover:bg-gray-50 cursor-pointer" onClick={()=>navigateTo(`/view-contact/${id}`)}> // tried making clickable row but buttons on this row click event not getting triggered
             <tr className="bg-white border-b-2 hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4">
+                    {index}
+                </td>
                 <td scope="row" className="px-6 py-4 text-gray-900 whitespace-nowrap">
                     {contact.name}
                 </td>
@@ -215,6 +219,9 @@ const Contacts = () => {
                                     <thead className="text-md text-gray-700 uppercase bg-gray-50">
                                         <tr>
                                             <th scope="col" className="px-6 py-3">
+                                                S.N
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
                                                 Name
                                             </th>
                                             <th scope="col" className="px-6 py-3">
@@ -233,7 +240,7 @@ const Contacts = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {contacts?.map(contact => <ContactRow key={contact._id} contact={contact} id={contact._id}/>)}
+                                        {contacts?.map((contact, index) => <ContactRow key={contact._id} contact={contact} id={contact._id} index={index+1}/>)}
                                         {/* contacts?.map => do mapping once contacts get value (true value) */}
                                         {/* {displayRow(contacts)} */}
                                         {/* {contacts.map(item => )}
