@@ -4,7 +4,6 @@ import axios from 'axios';
 import Loader from '../../components/loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../config/backend';
-import { BASE_URL } from './../../config/backend';
 
 const Contacts = () => {
 
