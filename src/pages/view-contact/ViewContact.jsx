@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Layout from './../../layouts/Layout';
 import Loader from '../../components/loader/Loader';
+import { BASE_URL } from '../../config/backend';
 
 const ViewContact = () => {
     const {id} = useParams();
@@ -18,7 +19,8 @@ const ViewContact = () => {
     useEffect(()=>{
         // To get all contactby id
         // const baseURL = `http://localhost:4444`;
-        const baseURL = process.env.REACT_APP_BASE_URL;
+        // const baseURL = process.env.REACT_APP_BASE_URL;
+        const baseURL = BASE_URL;
         const endPoint = `contact`;
         const URL = `${baseURL}/${endPoint}/${id}`;
 

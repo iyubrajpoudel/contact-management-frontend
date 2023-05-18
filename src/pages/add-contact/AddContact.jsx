@@ -4,6 +4,7 @@ import axios from 'axios';
 import imagePlaceholder from "./assets/images/image-placeholder.png";
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/loader/Loader';
+import { BASE_URL } from '../../config/backend';
 
 // Components
 
@@ -82,7 +83,8 @@ const AddContact = () => {
         // axios.post(<URL>, <Data>);
 
         // const baseURL = `http://localhost:4444`;
-        const baseURL = process.env.REACT_APP_BASE_URL;
+        // const baseURL = process.env.REACT_APP_BASE_URL;
+        const baseURL = BASE_URL;
         const endPoint = `contact`;
         // const URL = `localhost:4444/contact`;
         const URL = `${baseURL}/${endPoint}`;

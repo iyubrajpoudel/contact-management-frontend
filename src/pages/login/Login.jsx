@@ -7,6 +7,7 @@ import Loader from './../../components/loader/Loader';
 import Success from './../../components/success/Success';
 import Error from './../../components/error/Error';
 import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../../config/backend'
 
 const Login = () => {
 
@@ -35,7 +36,8 @@ const Login = () => {
         e.preventDefault();
 
         // posting to backend
-        const baseURL = process.env.REACT_APP_BASE_URL;
+        // const baseURL = process.env.REACT_APP_BASE_URL;
+        const baseURL = BASE_URL;
         const URL = `${baseURL}/user/login`
         try {
             setIsLoading(true);

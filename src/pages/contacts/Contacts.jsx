@@ -3,6 +3,8 @@ import Layout from '../../layouts/Layout';
 import axios from 'axios';
 import Loader from '../../components/loader/Loader';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config/backend';
+import { BASE_URL } from './../../config/backend';
 
 const Contacts = () => {
 
@@ -23,7 +25,7 @@ const Contacts = () => {
 
         // To get all contacts : GET request on /contact endpoint
         // const baseURL = `http://localhost:4444`;
-        const baseURL = process.env.REACT_APP_BASE_URL;
+        const baseURL = BASE_URL;
         const endPoint = `contact`;
         const URL = `${baseURL}/${endPoint}`;
 
@@ -148,7 +150,8 @@ const Contacts = () => {
         const confirm = window.confirm("Are you sure to delete a data ?");
         if(confirm){
             // const baseURL = `http://localhost:4444`;
-            const baseURL = process.env.REACT_APP_BASE_URL;
+            // const baseURL = process.env.REACT_APP_BASE_URL;
+            const baseURL = BASE_URL;
             const endPoint = `contact`;
             const URL = `${baseURL}/${endPoint}/${id}`;
             try {

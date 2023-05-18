@@ -7,6 +7,7 @@ import Loader from '../../components/loader/Loader'
 import Error from './../../components/error/Error';
 import Success from './../../components/success/Success';
 import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../../config/backend'
 
 /* 
 const TextField = ({ label, type, name, id, placeholder, value, handleChange }) => {
@@ -60,7 +61,8 @@ const Register = () => {
     const submitHandler = (e) =>{
         e.preventDefault();
 
-        const baseURL = process.env.REACT_APP_BASE_URL;
+        // const baseURL = process.env.REACT_APP_BASE_URL;
+        const baseURL = BASE_URL;
         const URL = `${baseURL}/user/register`
         try {
                 // start loader
