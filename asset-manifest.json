@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/contact-management-frontend/static/css/main.5682c47b.css",
+    "main.js": "/contact-management-frontend/static/js/main.005af2ea.js",
+    "static/media/loading.gif": "/contact-management-frontend/static/media/loading.63d7da1bc33c0063002c.gif",
+    "static/media/image-placeholder.png": "/contact-management-frontend/static/media/image-placeholder.4a862e309111613dccfb.png",
+    "index.html": "/contact-management-frontend/index.html",
+    "main.5682c47b.css.map": "/contact-management-frontend/static/css/main.5682c47b.css.map",
+    "main.005af2ea.js.map": "/contact-management-frontend/static/js/main.005af2ea.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5682c47b.css",
+    "static/js/main.005af2ea.js"
+  ]
+}
