@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../layouts/Layout'
 import TextField from '../../components/form/text-field/TextField'
-import Button from '../../components/form/button/Button'
+import Button from '../../components/button/Button'
 import axios from 'axios'
 import Loader from '../../components/loader/Loader'
 import Error from './../../components/error/Error';
@@ -165,7 +165,7 @@ const Register = () => {
                                                     <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`*******`} value={formData.password} handleChange={changeHandler} required={`required`} />
                                                 </div>
                                                 <div className="field">
-                                                    <Button>Register</Button>
+                                                    <Button type="submit" className={`bg-purple-600 hover:bg-purple-800 outline-purple-900`}>Register</Button>
                                                 </div>
                                             </div>
                                         </form>

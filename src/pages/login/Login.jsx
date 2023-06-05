@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../layouts/Layout'
 import TextField from '../../components/form/text-field/TextField'
-import Button from '../../components/form/button/Button'
+import Button from '../../components/button/Button'
 import axios from 'axios'
 import Loader from './../../components/loader/Loader';
 import Success from './../../components/success/Success';
@@ -134,7 +134,8 @@ const Login = () => {
                                                         <TextField label={`Password`} type={`password`} name={`password`} id={`passwordInput`} placeholder={`**********`} value={formData.password} handleChange={(e)=>changeHandler(e)} required={`required`} />
                                                     </div>
                                                     <div className="field">
-                                                        <Button>Login</Button>
+                                                        {/* <Button>Login</Button> */}
+                                                        <Button type="submit" className={`bg-purple-600 hover:bg-purple-800`}>Login</Button>
                                                     </div>
                                                 </div>
                                             </form>

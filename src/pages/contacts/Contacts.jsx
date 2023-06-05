@@ -4,6 +4,10 @@ import axios from 'axios';
 import Loader from '../../components/loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../config/backend';
+// import TextField from './../../components/form/text-field/TextField';
+import Button from '../../components/button/Button';
+import TextInput from './../../components/input/TextInput';
+import {FiSearch} from "react-icons/fi"
 
 const Contacts = () => {
 
@@ -15,6 +19,8 @@ const Contacts = () => {
 
     const [hasError, setHasError] = useState(false);
     const [error, setError] = useState("");
+
+    const [query, setQuery] = useState("");
 
     const navigateTo = useNavigate();
 
@@ -185,13 +191,38 @@ const Contacts = () => {
         }
     }
 
+    const handleSearchInput = (e) =>{
+        setQuery(e.target.value);
+    }
+
+    /* 
+    const handleSearchButton = (e) =>{
+        try {
+            
+        } catch (error) {
+            
+        }
+    } 
+    */
+
 
     return (
         <>
             <Layout>
-                <div className="container py-10 flex flex-col gap-8">
+                <div className="container p-2 py-10 flex flex-col gap-8">
                     <div className='row'>
                         <h2 className='text-3xl font-bold'>All Contacts</h2>
+                    </div>
+
+                    <div className="row">
+                        <div className="search-bar flex w-full lg:w-1/3">
+                            <div className="input w-full">
+                                <TextInput placeholder="Search contact..." onChange={(e)=>handleSearchInput(e)} value={query} />
+                            </div>
+                            <div className="button">
+                                <Button className={`bg-purple-600 hover:bg-purple-800 outline-purple-900 h-full `}><FiSearch/></Button>
+                            </div>
+                        </div>
                     </div>
 
                     { // for displaying error
@@ -240,7 +271,17 @@ const Contacts = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {contacts?.map((contact, index) => <ContactRow key={contact._id} contact={contact} id={contact._id} index={index+1}/>)}
+                                        {/* {contacts?.map((contact, index) => <ContactRow key={contact._id} contact={contact} id={contact._id} index={index+1}/>)} */}
+
+                                        {/* search filtering */}
+                                        {contacts?.
+                                        filter(contact => {
+                                            return contact.name.includes(query) || contact.email.includes(query) || contact.phone.toString().includes(query)
+                                        }).
+                                        map((contact, index) => <ContactRow key={contact._id} contact={contact} id={contact._id} index={index+1}/>)}
+
+
+
                                         {/* contacts?.map => do mapping once contacts get value (true value) */}
                                         {/* {displayRow(contacts)} */}
                                         {/* {contacts.map(item => )}
